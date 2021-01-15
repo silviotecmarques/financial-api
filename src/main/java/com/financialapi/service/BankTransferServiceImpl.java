@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.financialapi.document.BankTransfer;
 import com.financialapi.repository.BankTransferRepository;
 
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service
 public class BankTransferServiceImpl implements BankTransferService {
 
 	@Autowired
