@@ -1,12 +1,16 @@
 package com.financialapi;
 
+import com.financialapi.csv.CsvGenerator;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.financialapi.document.BankTransfer;
 import com.financialapi.service.BankTransferService;
-
 import reactor.core.publisher.Mono;
 
 import static  org.springframework.web.reactive.function.BodyInserters.fromPublisher ;
@@ -20,6 +24,26 @@ public class BankTransferHandler {
 	
 	@Autowired
 	BankTransferService service;
+
+	@Autowired
+	CsvGenerator csvGenerator;
+
+	public Mono<ServerResponse> downloadReportCSV(ServerRequest request) {
+		String fileName = String.format("%s.csv", RandomStringUtils.randomAlphabetic(10));
+
+		String document = request.pathVariable("document");
+
+		return ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE)
+				.body(service.findByDocument(document)
+						.collectList()
+						.flatMap(csvGenerator::generate)
+						.flatMap(inputStream -> {
+							Resource resource = new InputStreamResource(inputStream);
+							return Mono.just(resource);
+						}), Resource.class);
+	}
 	
 	public Mono<ServerResponse> findAll(ServerRequest request){
 		return ok()
@@ -40,5 +64,5 @@ public class BankTransferHandler {
 				.contentType(MediaType.APPLICATION_JSON)
 				.body(fromPublisher(banktransfer.flatMap(service::save), BankTransfer.class));
 
-}
 	}
+}
