@@ -10,5 +10,6 @@ public interface BankTransferService {
 	Flux<BankTransfer> findAll();
 	Mono<BankTransfer> findById(String id);
 	Mono<BankTransfer> save(BankTransfer bankTransfer);
+	Flux<BankTransfer> findByDocument(String document);
 	
 }

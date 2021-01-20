@@ -22,8 +22,8 @@ public class BankTransferRouter {
 		return RouterFunctions
 				.route(GET("/banktransfer").and(accept(MediaType.APPLICATION_JSON)), handler::findAll)
 				.andRoute(GET("/banktransfer/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::findById)
-				.andRoute(POST("/banktransfer").and(accept(MediaType.APPLICATION_JSON)), handler::save);
-				
+				.andRoute(POST("/banktransfer").and(accept(MediaType.APPLICATION_JSON)), handler::save)
+				.andRoute(GET("/banktransfer/report/document/{document}"), handler::downloadReportCSV);
 	}
 	
 }
