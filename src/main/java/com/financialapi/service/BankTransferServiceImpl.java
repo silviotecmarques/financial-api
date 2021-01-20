@@ -13,21 +13,26 @@ import reactor.core.publisher.Mono;
 public class BankTransferServiceImpl implements BankTransferService {
 
 	@Autowired
-	BankTransferRepository btr;
+	BankTransferRepository bankTransferRepository;
 	
 	@Override
 	public Flux<BankTransfer> findAll() {
-		return btr.findAll();
+		return bankTransferRepository.findAll();
 	}
 
 	@Override
 	public Mono<BankTransfer> findById(String id) {
-		return btr.findById(id);
+		return bankTransferRepository.findById(id);
 	}
 
 	@Override
 	public Mono<BankTransfer> save(BankTransfer bankTransfer) {
-		return btr.save(bankTransfer);
+		return bankTransferRepository.save(bankTransfer);
+	}
+
+	@Override
+	public Flux<BankTransfer> findByDocument(String document) {
+		return bankTransferRepository.findByDocument(document);
 	}
 
 }
