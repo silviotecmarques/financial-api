@@ -1,6 +1,7 @@
 package com.financialapi;
 
 import com.financialapi.csv.CsvGenerator;
+import com.financialapi.document.BankTransferStatusEnum;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -44,7 +45,27 @@ public class BankTransferHandler {
 							return Mono.just(resource);
 						}), Resource.class);
 	}
-	
+
+	public Mono<ServerResponse> findByStatus(ServerRequest request) {
+		String fileName = String.format("%s.csv", RandomStringUtils.randomAlphabetic(10));
+
+		String status = request.pathVariable("status");
+
+		BankTransferStatusEnum statusEnum = BankTransferStatusEnum.valueOf(status);
+
+		return ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE)
+				.body(service.findByStatus(statusEnum)
+				.collectList()
+				.flatMap(csvGenerator::generate)
+				.flatMap(inputStream -> {
+					Resource resource = new InputStreamResource(inputStream);
+					return  Mono.just(resource);
+				}), Resource.class);
+
+	}
+
 	public Mono<ServerResponse> findAll(ServerRequest request){
 		return ok()
 				.contentType(MediaType.APPLICATION_JSON)
@@ -66,11 +87,5 @@ public class BankTransferHandler {
 
 	}
 
-	public Mono<ServerResponse> findByStatus(ServerRequest request){
-		String status = request.pathVariable("status");
-		return ok()
-				.contentType(MediaType.APPLICATION_JSON)
-				.body(service.findByStatus(status), BankTransfer.class);
-	}
 
 }

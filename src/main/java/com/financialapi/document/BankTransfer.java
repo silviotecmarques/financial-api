@@ -22,7 +22,7 @@ public class BankTransfer {
 	private String agency;
 	private String account;
 	private String document;
-	private BankTransferStatus status;
+	private BankTransferStatusEnum status;
 	private LocalDateTime processingdate;
 	
 }

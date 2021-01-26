@@ -11,6 +11,7 @@ public interface BankTransferService {
 	Mono<BankTransfer> findById(String id);
 	Mono<BankTransfer> save(BankTransfer bankTransfer);
 	Flux<BankTransfer> findByDocument(String document);
-	Flux<BankTransfer> findByStatus(String status);
-	
+	Flux<BankTransfer> findByStatus(Enum status);
+	//Flux<BankTransfer>
+
 }
