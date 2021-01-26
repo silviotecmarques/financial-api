@@ -1,5 +1,6 @@
 package com.financialapi.document;
 
+import com.financialapi.constants.BankTransferStatusEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-
 
 @Getter
 @Setter
