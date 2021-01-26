@@ -65,4 +65,12 @@ public class BankTransferHandler {
 				.body(fromPublisher(banktransfer.flatMap(service::save), BankTransfer.class));
 
 	}
+
+	public Mono<ServerResponse> findByStatus(ServerRequest request){
+		String status = request.pathVariable("status");
+		return ok()
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(service.findByStatus(status), BankTransfer.class);
+	}
+
 }

@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -20,7 +22,7 @@ public class BankTransfer {
 	private String agency;
 	private String account;
 	private String document;
-	private String status;
-	private String processingdate;
+	private BankTransferStatus status;
+	private LocalDateTime processingdate;
 	
 }
