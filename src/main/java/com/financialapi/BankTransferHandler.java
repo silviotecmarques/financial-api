@@ -1,7 +1,7 @@
 package com.financialapi;
 
 import com.financialapi.csv.CsvGenerator;
-import com.financialapi.document.BankTransferStatusEnum;
+import com.financialapi.constants.BankTransferStatusEnum;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;

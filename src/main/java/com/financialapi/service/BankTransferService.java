@@ -1,5 +1,6 @@
 package com.financialapi.service;
 
+import com.financialapi.constants.BankTransferStatusEnum;
 import com.financialapi.document.BankTransfer;
 
 import reactor.core.publisher.Flux;
@@ -11,7 +12,5 @@ public interface BankTransferService {
 	Mono<BankTransfer> findById(String id);
 	Mono<BankTransfer> save(BankTransfer bankTransfer);
 	Flux<BankTransfer> findByDocument(String document);
-	Flux<BankTransfer> findByStatus(Enum status);
-	//Flux<BankTransfer>
-
+	Flux<BankTransfer> findByStatus(BankTransferStatusEnum status);
 }

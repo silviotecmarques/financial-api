@@ -1,5 +1,6 @@
 package com.financialapi.service;
 
+import com.financialapi.constants.BankTransferStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.financialapi.document.BankTransfer;
@@ -36,8 +37,7 @@ public class BankTransferServiceImpl implements BankTransferService {
 	}
 
 	@Override
-	public Flux <BankTransfer> findByStatus(Enum status) {
+	public Flux <BankTransfer> findByStatus(BankTransferStatusEnum status) {
 		return bankTransferRepository.findByStatus(status);
 	}
-
 }

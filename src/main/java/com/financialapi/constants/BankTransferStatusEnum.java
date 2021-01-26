@@ -1,4 +1,4 @@
-package com.financialapi.document;
+package com.financialapi.constants;
 
 public enum BankTransferStatusEnum {
     AWAITING_PROCESSING,
