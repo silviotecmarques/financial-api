@@ -1,6 +1,6 @@
 package com.financialapi.service;
 
-import com.financialapi.constants.BankTransferStatusEnum;
+import com.financialapi.enums.BankTransferStatusEnum;
 import com.financialapi.document.BankTransfer;
 
 import reactor.core.publisher.Flux;

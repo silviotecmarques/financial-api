@@ -1,6 +1,6 @@
 package com.financialapi.document;
 
-import com.financialapi.constants.BankTransferStatusEnum;
+import com.financialapi.enums.BankTransferStatusEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

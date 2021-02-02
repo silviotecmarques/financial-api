@@ -1,6 +1,6 @@
 package com.financialapi.repository;
 
-import com.financialapi.constants.BankTransferStatusEnum;
+import com.financialapi.enums.BankTransferStatusEnum;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import com.financialapi.document.BankTransfer;
